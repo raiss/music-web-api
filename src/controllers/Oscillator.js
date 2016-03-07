@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
-import * as simpleOscillator from './audioServices/simpleOscillator.service';
 
 import './Oscillator.css';
 
 export class Oscillator extends Component {
   constructor(props) {
     super(props);
-    simpleOscillator.init();
-    simpleOscillator.start();
     this.state = {inputVal: "440"};
-
   }
 
   input(e) {
     this.setState({inputVal: e.target.value})
-    simpleOscillator.modulate(e.target.value)
+    this.props.modulator(e.target.value)
   }
 
   render() {

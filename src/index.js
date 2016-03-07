@@ -1,9 +1,11 @@
 import { render } from 'react-dom';
 import React from 'react';
 
-import  { Oscillator }  from "./Oscillator";
+import  { App }  from "./App";
+
+
 
 render(
-  <Oscillator/>,
+  <App/>,
   document.getElementById('root')
 );

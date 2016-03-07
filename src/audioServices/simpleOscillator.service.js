@@ -1,23 +1,31 @@
 "use strict";
 
-var ctx = {};
-var oscillator = {};
+// let ctx = {};
+// let oscillator = {};
 
-export function init(_ctx) {
-  ctx = _ctx || new AudioContext();
-  oscillator = ctx.createOscillator()
-  oscillator.connect(ctx.destination)
+export class OscillatorService {
+  constructor(_ctx) {
+    this.ctx = _ctx || new AudioContext();
+    this.oscillator = this.ctx.createOscillator()
+    this.oscillator.connect(this.ctx.destination)
+  }
+
+  start() {
+    this.oscillator.start(0);
+  }
+
+  modulate(val) {
+    this.oscillator.frequency.value = val|| 440;
+  }
+
+  stop() {
+    this.oscillator.stop(0);
+    //TODO: distroy/disconect the oscillator
+  }
 }
 
-export function start() {
-  oscillator.start(0);
-}
-
-export function modulate(val) {
-  oscillator.frequency.value = val|| 440;
-}
-
-export function stop() {
-  oscillator.stop(0);
-  //TODO: distroy/disconect the oscillator
-}
+// export function init(_ctx) {
+//   ctx = _ctx || new AudioContext();
+//   oscillator = ctx.createOscillator()
+//   oscillator.connect(ctx.destination)
+// }
