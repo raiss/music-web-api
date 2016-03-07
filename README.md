@@ -1,2 +1,2 @@
-# react-number-counter
-a component which increment/decrement number nicely
+# music web api
+experimenting with web api
