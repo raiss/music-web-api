@@ -1,3 +1,8 @@
 .oscillator-slider {
   width: 100%;
 }
+
+.oscillator-waveform {
+  display: inline-block;
+  width: 100px;
+}
