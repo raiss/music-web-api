@@ -34,9 +34,3 @@ export class OscillatorService {
     //TODO: distroy/disconect the oscillator
   }
 }
-
-// export function init(_ctx) {
-//   ctx = _ctx || new AudioContext();
-//   oscillator = ctx.createOscillator()
-//   oscillator.connect(ctx.destination)
-// }
