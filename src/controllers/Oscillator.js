@@ -9,7 +9,10 @@ export class Oscillator extends Component {
     super(props);
     this.simpleOscillator = new OscillatorService();
     this.simpleOscillator.start();
-    this.state = {inputVal: "440"};
+    this.state = {
+      inputVal: "220",
+      isMute: true
+    };
   }
 
   waveform(type) {
@@ -23,8 +26,9 @@ export class Oscillator extends Component {
   }
 
   mute() {
-    // this.setState({muted: !this.state.muted});
-    this.simpleOscillator.gain(0);
+    this.setState({isMute: !this.state.isMute});
+    let vol = this.state.isMute ? 1 : 0;
+    this.simpleOscillator.gain(vol);
   }
 
   changeType( type) {
@@ -41,7 +45,7 @@ export class Oscillator extends Component {
         <div className="oscillator-waveform" onClick={this.waveform.bind(this, "sawtooth")}> sawtooth </div>
         <div className="oscillator-waveform" onClick={this.waveform.bind(this, "triangle")}> triangle </div>
 
-        <div className="oscillator-mute" onClick={this.mute.bind(this)}> mute </div>
+        <div className="oscillator-mute" onClick={this.mute.bind(this)}> {this.state.isMute ? "unmute" : "mute"} </div>
         <hr/>
         <div>{this.state.inputVal + " Hz"}</div>
         <input className="oscillator-slider" type="range" min="1" max="3520" step="1"  onChange={this.modulate.bind(this)}/>

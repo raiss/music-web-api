@@ -9,7 +9,7 @@ export class OscillatorService {
     this.oscillator = this.ctx.createOscillator()
     this.gainNode = this.ctx.createGain();
     this.oscillator.connect(this.gainNode)
-    this.oscillator.connect(this.ctx.destination)
+    this.gainNode.connect(this.ctx.destination)
   }
 
   start() {
