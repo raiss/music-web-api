@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 import { OscillatorService }  from '../audioServices/SimpleOscillator.service';
+import { GenericButton }  from '../components/GenericButton';
+import { Fader }  from './Fader';
 
 import './Oscillator.css';
 
@@ -11,11 +13,12 @@ export class Oscillator extends Component {
     this.simpleOscillator.start();
     this.state = {
       inputVal: "220",
-      isMute: true
+      isMute: false
     };
   }
 
   waveform(type) {
+    console.log("type: ", type);
     this.simpleOscillator.waveform(type);
     this.simpleOscillator.waveform(type);
   }
@@ -31,8 +34,7 @@ export class Oscillator extends Component {
     this.simpleOscillator.gain(vol);
   }
 
-  changeType( type) {
-    console.log("change type: ", type);
+  changeType(type) {
     this.props.waveform(type);
   }
 
@@ -40,15 +42,15 @@ export class Oscillator extends Component {
     return (
       <div>
         <div>Oscillator Component</div>
-        <div className="oscillator-waveform" onClick={this.waveform.bind(this, "sine")}> sine </div>
-        <div className="oscillator-waveform" onClick={this.waveform.bind(this, "square")}> square </div>
-        <div className="oscillator-waveform" onClick={this.waveform.bind(this, "sawtooth")}> sawtooth </div>
-        <div className="oscillator-waveform" onClick={this.waveform.bind(this, "triangle")}> triangle </div>
+        <GenericButton onTouchTap={this.waveform.bind(this, "sine")}><div className="oscillator-waveform"> sine </div></GenericButton>
+        <GenericButton onTouchTap={this.waveform.bind(this, "square")}><div className="oscillator-waveform"> square </div></GenericButton>
+        <GenericButton onTouchTap={this.waveform.bind(this, "sawtooth")}><div className="oscillator-waveform"> sawtooth </div></GenericButton>
+        <GenericButton onTouchTap={this.waveform.bind(this, "triangle")}><div className="oscillator-waveform"> triangle </div></GenericButton>
 
-        <div className="oscillator-mute" onClick={this.mute.bind(this)}> {this.state.isMute ? "unmute" : "mute"} </div>
+        <GenericButton onTouchTap={this.mute.bind(this)}><div className="oscillator-mute"> {this.state.isMute ? "unmute" : "mute"} </div></GenericButton>
         <hr/>
         <div>{this.state.inputVal + " Hz"}</div>
-        <input className="oscillator-slider" type="range" min="1" max="3520" step="1"  onChange={this.modulate.bind(this)}/>
+        <Fader onChange={this.modulate.bind(this)}></Fader>
       </div>
     )
   }
