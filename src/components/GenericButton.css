@@ -1,9 +1,12 @@
 .genericbutton-container {
   display: flex;
+  overflow: hidden;
   font-size: 1.2em;
-  margin: 5px 2px;
+  line-height: 1.2em;
+  padding: 2px;
   min-width: 80px;
-  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);;
+  border-radius: 5px;
+  text-decoration: underline;
   justify-content: space-around;
   position: relative;
   -webkit-user-select: none; /* webkit (safari, chrome) browsers */
@@ -13,5 +16,5 @@
 }
 
 .genericbutton-container:active {
-  background: rgba(180, 180, 200, 0.3);;
+  background: rgba(0, 0, 0, 0.3);;
 }

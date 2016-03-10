@@ -1,0 +1,7 @@
+.gain-container {
+  display: flex;
+}
+
+.gain-mute {
+  align-self: center;
+}
