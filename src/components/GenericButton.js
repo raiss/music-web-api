@@ -1,6 +1,5 @@
 import './GenericButton.css'
 import React, { Component } from 'react';
-import { debounce } from 'lodash';
 
 export class GenericButton extends Component {
   render() {

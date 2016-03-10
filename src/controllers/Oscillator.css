@@ -1,8 +1,9 @@
-.oscillator-slider {
-  width: 100%;
+.oscillator-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .oscillator-waveform {
   display: inline-block;
-  width: 100px;
 }

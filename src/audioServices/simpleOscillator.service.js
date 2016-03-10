@@ -21,7 +21,6 @@ export class OscillatorService {
   }
 
   gain(val) {
-    console.log(val);
     this.gainNode.gain.value = val || 0;
   }
 
