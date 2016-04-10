@@ -1,15 +1,16 @@
 "use strict";
-
-// let ctx = {};
-// let oscillator = {};
+import { GainService } from "./gain.service";
 
 export class OscillatorService {
   constructor(_ctx) {
     this.ctx = _ctx || new AudioContext();
-    this.oscillator = this.ctx.createOscillator()
-    this.gainNode = this.ctx.createGain();
-    this.oscillator.connect(this.gainNode)
-    this.gainNode.connect(this.ctx.destination)
+    this.oscillator = this.ctx.createOscillator();
+    this.gainNode = new GainService(this.ctx);
+  }
+
+  out(destination) {
+    console.log(destination);
+    this.oscillator.connect(destination.getNode());
   }
 
   start() {
@@ -21,7 +22,7 @@ export class OscillatorService {
   }
 
   gain(val) {
-    this.gainNode.gain.value = val || 0;
+    this.gainNode.gain(val);
   }
 
   modulate(val) {

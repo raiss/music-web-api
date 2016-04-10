@@ -5,6 +5,7 @@ import { GenericButton }  from '../components/GenericButton';
 import { Fader }  from './Fader';
 import { Controller }  from './Controller';
 
+
 import './Gain.css';
 
 export class Gain extends Component {
@@ -16,12 +17,14 @@ export class Gain extends Component {
   }
 
   modulate(e) {
-    this.setState({inputVal: e.target.value});
+    this.setState({inputVal: e.target.value / 1000, isMute: false});
+    this.props.gainNode.gain(this.state.inputVal)
   }
 
   mute() {
     this.setState({isMute: !this.state.isMute});
     let vol = this.state.isMute ? 1 : 0;
+    this.props.gainNode.gain(vol)
   }
 
   render() {
@@ -29,7 +32,12 @@ export class Gain extends Component {
       <Controller title="Gain Component">
         <div className="gain-container">
           <GenericButton onClick={this.mute.bind(this)}><div className="gain-mute">{this.state.isMute ? "unmute" : "mute"}</div></GenericButton>
-          <Fader onChange={this.modulate.bind(this)}></Fader>
+          <Fader
+            onChange={this.modulate.bind(this)}
+            min={0}
+            max={1000}
+            step={10}
+            ></Fader>
         </div>
       </Controller>
     )

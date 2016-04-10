@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { OscillatorService }  from '../audioServices/SimpleOscillator.service';
 import { GenericButton }  from '../components/GenericButton';
 import { Fader }  from './Fader';
 import { Controller }  from './Controller';
@@ -10,10 +9,11 @@ import './Oscillator.css';
 export class Oscillator extends Component {
   constructor(props) {
     super(props);
-    this.simpleOscillator = new OscillatorService();
+    this.simpleOscillator = this.props.oscillatorNode;
+    this.simpleOscillator.out(this.props.destination)
     this.simpleOscillator.start();
     this.state = {
-      inputVal: "220",
+      inputVal: "110",
       isMute: false
     };
   }
@@ -28,16 +28,6 @@ export class Oscillator extends Component {
     this.simpleOscillator.modulate(e.target.value);
   }
 
-  mute() {
-    this.setState({isMute: !this.state.isMute});
-    let vol = this.state.isMute ? 1 : 0;
-    this.simpleOscillator.gain(vol);
-  }
-
-  changeType(type) {
-    this.props.waveform(type);
-  }
-
   render() {
     return (
       <Controller title="Oscillator Component">
@@ -46,8 +36,6 @@ export class Oscillator extends Component {
           <GenericButton onClick={this.waveform.bind(this, "square")}><div className="oscillator-waveform">square</div></GenericButton>
           <GenericButton onClick={this.waveform.bind(this, "sawtooth")}><div className="oscillator-waveform">sawtooth</div></GenericButton>
           <GenericButton onClick={this.waveform.bind(this, "triangle")}><div className="oscillator-waveform">triangle</div></GenericButton>
-
-          <GenericButton onClick={this.mute.bind(this)}><div className="oscillator-mute">{this.state.isMute ? "unmute" : "mute"}</div></GenericButton>
         </div>
         <div>{this.state.inputVal + " Hz"}</div>
         <Fader onChange={this.modulate.bind(this)}></Fader>
