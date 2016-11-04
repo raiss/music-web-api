@@ -1,0 +1,8 @@
+.node_container {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px gray solid;
+  transition: .2s ease-in-out transform;
+  transform: translate(0, 0);
+}

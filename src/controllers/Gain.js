@@ -1,14 +1,27 @@
+import './Gain.css';
 import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
 
 // import { GainService }  from '../audioServices/SimpleGain.service';
 import { GenericButton }  from '../components/GenericButton';
 import { Fader }  from './Fader';
 import { Controller }  from './Controller';
 
+const cardSource = {
+  beginDrag(props) {
+    return {
+      text: props.text
+    };
+  }
+};
 
-import './Gain.css';
-
-export class Gain extends Component {
+@DragSource("ItemTypes.CARD", cardSource, (connect, monitor) => {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+})
+export default class Gain {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,8 +41,9 @@ export class Gain extends Component {
   }
 
   render() {
-    return (
-      <Controller title="Gain Component">
+    const { connectDragSource } = this.props;
+    console.log('>>>>', this.props, "<<<");
+    return connectDragSource(<Controller title="Gain Component">
         <div className="gain-container">
           <GenericButton onClick={this.mute.bind(this)}><div className="gain-mute">{this.state.isMute ? "unmute" : "mute"}</div></GenericButton>
           <Fader
@@ -39,7 +53,6 @@ export class Gain extends Component {
             step={10}
             ></Fader>
         </div>
-      </Controller>
-    )
+      </Controller>)
   }
 }
